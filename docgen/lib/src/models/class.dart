@@ -123,6 +123,14 @@ class Class extends OwnedIndexable<dart2js_mirrors.Dart2JsInterfaceTypeMirror>
     result = owner.findElementInScope(name);
     return result == null ? super.findElementInScope(name) : result;
   }
+  
+  XXgetTokenSource() {
+    //super.mirror.library.
+    // var tokengetTokenSource();
+    return mirror.location;
+    
+    
+  }
 
   String get typeName => 'class';
 

@@ -22,8 +22,11 @@ String get rootDirectory {
   if (_rootDirectoryCache != null) return _rootDirectoryCache;
   var scriptDir = path.absolute(path.dirname(Platform.script.toFilePath()));
   var root = scriptDir;
+  root = "/Applications/dart/dart-sdk";
+  
   var base = path.basename(root);
   // When we find dart-sdk or sdk we are one level below the root.
+  
   while (base != 'dart-sdk' && base != 'sdk' && base != 'pkg') {
     root = path.dirname(root);
     base = path.basename(root);

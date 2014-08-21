@@ -56,6 +56,8 @@ String dartBinary;
 /// This option is useful when only the SDK libraries are needed.
 ///
 /// Returned Future completes with true if document generation is successful.
+/// TODO(adam): we could have our own generateDocumentation as top level method.
+/// generateSourceGraphDocumentation
 Future<bool> generateDocumentation(List<String> files, {String packageRoot,
     bool outputToYaml: true, bool includePrivate: false, bool includeSdk: false,
     bool parseSdk: false, String introFileName: '',
@@ -178,6 +180,8 @@ int _indexableComparer(Indexable a, Indexable b) {
 }
 
 /// Creates documentation for filtered libraries.
+/// TODO(adam): we could redirect this call to our own way of 
+/// documentating libraries. 
 void _documentLibraries(List<LibraryMirror> libs, bool includeSdk,
   bool parseSdk, String introFileName, String startPage, bool indentJson) {
   libs.forEach((lib) {
@@ -214,6 +218,8 @@ void _documentLibraries(List<LibraryMirror> libs, bool includeSdk,
 
 /// Output all of the libraries and classes into json files for consumption by a
 /// viewer.
+/// TODO (adam): by this point we could map the json writer into a 
+/// transformed version that srclib expects. 
 void _writeOutputFiles(Map<String, dynamic> libraryMap, Iterable<Indexable>
     filteredEntities, String startPage, JsonEncoder encoder) {
   if (startPage != null) libraryMap['start-page'] = startPage;
@@ -247,6 +253,10 @@ void _writeOutputFiles(Map<String, dynamic> libraryMap, Iterable<Indexable>
 
 /// Helper method to serialize the given Indexable out to a file.
 void _writeIndexableToFile(Indexable result, JsonEncoder encoder) {
+  print("result.mirror.runtimeType = "
+        "${result.mirror.runtimeType}");
+  print("result.mirror.location = "
+      "${(result.mirror.location as dart2js_mirrors.Dart2JsSourceLocation).sourceUri.toString()}");
   var outputFile = result.qualifiedName + '.json';
   var output = encoder.convert(result.toMap());
   _writeToFile(output, outputFile);

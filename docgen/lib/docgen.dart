@@ -37,6 +37,9 @@ export 'src/package_helpers.dart' show packageNameFor;
 /// simple server to view the documentation.
 ///
 /// Returned Future completes with true if document generation is successful.
+/// TODO(adam): this top level just forwards to 'src/generator.dart' as gen.generateDocumentation
+/// we should be abel to call directly to gen.generateDocumentation for our needs.
+/// https://code.google.com/p/dart/issues/detail?id=20620
 Future<bool> docgen(List<String> files, {String packageRoot,
     bool includePrivate: false, bool includeSdk: false, bool parseSdk: false,
     String introFileName: '', String out: gen.DEFAULT_OUTPUT_DIRECTORY,
